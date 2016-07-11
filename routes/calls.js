@@ -43,7 +43,7 @@ var enqueue_question = function (recording) {
 // Twilio callback handling. Set up routes for different parts of the phone
 // call.
 router.post('/', twilio.webhook(twilio_auth_token), function (req, res) {
-  log.log(req.body.CallSid + '-> calls/')
+  log.info(req.body.CallSid + '-> calls/')
   log.debug(req.body)
 
   var twiml = new twilio.TwimlResponse();
