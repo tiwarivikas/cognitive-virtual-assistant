@@ -1,0 +1,41 @@
+{
+  "name": "conversation-simple",
+  "description": "A simple Node.js based web app which shows how to use the Conversation API to recognize user intents.",
+  "version": "0.1.1",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "istanbul cover ./node_modules/mocha/bin/_mocha",
+    "lint": "eslint .",
+    "autofix": "eslint --fix .",
+    "codecov": "npm run test && (codecov || true)"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "body-parser": "1.15.1",
+    "dotenv": "^2.0.0",
+    "express": "4.13.4",
+    "express-plates": "^0.1.4",
+    "express-xml-bodyparser": "^0.0.7",
+    "loglevel": "^1.2.0",
+    "node-rest-client": "^1.8.0",
+    "watson-developer-cloud": "^1.8.0",
+    "sox": "^0.1.0",
+    "tmp": "^0.0.24",
+    "twilio": "^1.10.0",
+    "cfenv": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^6.0.4",
+    "codecov": "^1.0.1",
+    "eslint": "^2.8.0",
+    "eslint-config-airbnb-es5": "^1.0.9",
+    "eslint-plugin-react": "^5.1.1",
+    "istanbul": "^0.4.2",
+    "mocha": "^2.4.5",
+    "supertest": "^1.2.0"
+  },
+  "engine": {
+    "node": ">= 4.2.4"
+  }
+}

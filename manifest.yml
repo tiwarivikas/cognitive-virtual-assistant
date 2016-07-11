@@ -1,0 +1,19 @@
+---
+declared-services:
+  conversation-experimental:
+    label: conversation
+    plan: experimental
+  text-to-speech-vtiwari4:
+    label: text_to_speech
+    plan: standard
+applications:
+- services:
+  - conversation-experimental
+  - text-to-speech-vtiwari4
+  command: node server.js
+  name: car-assistant-vtiwari4
+  host: car-assistant-vtiwari4
+  domain: mybluemix.net
+  path: .
+  instances: 1
+  memory: 512MB
