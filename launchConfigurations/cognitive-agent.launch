@@ -9,6 +9,6 @@
     "Name": "cognitive-agent",
     "Instrumentation": {}
   },
-  "Path": "",
+  "Path": "manifest.yml",
   "Type": "Cloud Foundry"
 }
