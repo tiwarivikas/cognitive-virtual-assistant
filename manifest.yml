@@ -11,8 +11,8 @@ applications:
   - conversation-experimental
   - text-to-speech-vtiwari4
   command: node server.js
-  name: car-assistant-vtiwari4
-  host: car-assistant-vtiwari4
+  name: cognitive-agent-vtiwari4
+  host: cognitive-agent-vtiwari4
   domain: mybluemix.net
   path: .
   instances: 1
