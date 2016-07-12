@@ -27,8 +27,8 @@ var enqueue_question = function (recording) {
   speech.text(audio_location, function (question) {
     log.info(call_ssid + ' QUESTION: ' + question)
     conversation.doConversation(question, contexts[call_ssid], function (res) {
-      log.info(call_ssid + ' ANSWER: ' + res.output.text);
-      answers[call_ssid] = res.output.text;
+      log.info(call_ssid + ' ANSWER: ' + res.output.text[0]);
+      answers[call_ssid] = res.output.text[0];
       contexts[call_ssid] = res.context;
 
       var forward_to = url + '/calls/answer'
@@ -48,7 +48,7 @@ router.post('/', twilio.webhook(twilio_auth_token), function (req, res) {
 
   var twiml = new twilio.TwimlResponse();
   twiml.say('Hello this is Watson Car assistant, how can I help you? Press any key after you have finished speaking')
-    .record({timeout: 30, action: '/calls/recording'})
+    .record({timeout: 120, action: '/calls/recording'})
  
   res.send(twiml)
 })
@@ -85,7 +85,7 @@ router.post('/answer', twilio.webhook(twilio_auth_token), function (req, res) {
 
   twiml.say(answers[req.body.CallSid])
     .say('Is there anything else I can help you with?')
-    .record({timeout: 30, action: '/calls/recording'})
+    .record({timeout: 120, action: '/calls/recording'})
 
   res.send(twiml)
 })
