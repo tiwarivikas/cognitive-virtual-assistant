@@ -1,8 +1,8 @@
 ---
 declared-services:
-  conversation-experimental:
+  Conversation-vtiwari4:
     label: conversation
-    plan: experimental
+    plan: free
   text-to-speech-vtiwari4:
     label: text_to_speech
     plan: standard
