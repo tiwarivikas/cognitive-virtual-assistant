@@ -215,7 +215,7 @@ var binArrayToJson = function(binArray)
 }
 
 function doConversation(req, res) {
-   var workspace = process.env.WORKSPACE_ID || '0dd91079-83d3-4a11-9288-cfc87724ed08';
+   var workspace = process.env.WORKSPACE_ID || '9d0e83b2-d726-4026-b4ae-392c83854192';
   if (!workspace || workspace === '<workspace-id>') {
     return res.json({'output': {'text': 'The app has not been configured with a <b>WORKSPACE_ID</b> environment variable. Please refer to the ' +
     '<a href="https://github.com/watson-developer-cloud/conversation-simple">README</a> documentation on how to set this variable. <br>' +
