@@ -8,7 +8,7 @@ declared-services:
     plan: standard
 applications:
 - services:
-  - conversation-experimental
+  - Conversation-vtiwari4
   - text-to-speech-vtiwari4
   command: node server.js
   name: cognitive-agent-vtiwari4
