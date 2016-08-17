@@ -39,10 +39,9 @@ app.use(bodyParser.json());
 // Create the service wrapper
 var conversation = watson.conversation({
   url: 'https://gateway.watsonplatform.net/conversation-experimental/api',
-  username: process.env.CONVERSATION_USERNAME || 'eeeacbb5-8377-4e18-ba4c-fe08929e7c81',
-  password: process.env.CONVERSATION_PASSWORD || 'qSITh6JBvvqW',
-  version_date: '2016-05-19',
-  version: 'v1-experimental'
+  username: process.env.CONVERSATION_USERNAME || '1dc203b6-c6a4-44c5-ad41-1028face9bd6',
+  password: process.env.CONVERSATION_PASSWORD || '4PrgxwA12SuG',
+  version: 'free'
 });
 
 app.get('/test', function(request, response) {
