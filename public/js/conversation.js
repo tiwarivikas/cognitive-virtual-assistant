@@ -6,6 +6,7 @@
  // initial load
   var $userInput;
   $(document).ready(function() {
+      //Api.init();
       $userInput = $('#textInput');
       $('.input-btn').click(conductConversation);
       /*$userInput.keyup(function(event){
@@ -68,7 +69,7 @@ var ConversationPanel = (function() {
     // The client displays the initial message to the end user
     displayMessage(
       {output:
-        {text: 'Hello! This is Watson Car Assistant.'}
+        {text: ['Hello! This is Watson Cognitive Assistant.']}
       },
       settings.authorTypes.watson);
     setupInputBox();
@@ -196,22 +197,51 @@ var ConversationPanel = (function() {
         text2Speech(newPayload.output.text);
       }
       // Create new message DOM element
-      var messageDiv = buildMessageDomElement(newPayload, isUser);
-      var chatBoxElement = document.querySelector(settings.selectors.chatBox);
-      var previousLatest = chatBoxElement.querySelector((isUser
-              ? settings.selectors.fromUser : settings.selectors.fromWatson)
-              + settings.selectors.latest);
-      // Previous "latest" message is no longer the most recent
-      if (previousLatest) {
-        previousLatest.classList.remove('latest');
+     
+      var dataObj = isUser ? newPayload.input : newPayload.output;
+      var arrText;
+      if(!Array.isArray(dataObj.text)) {
+        arrText = new Array();
+        arrText[0] = dataObj.text;
+      } else {
+        arrText = dataObj.text;
       }
 
-      chatBoxElement.appendChild(messageDiv);
-      // Class to start fade in animation
-      messageDiv.classList.add('load');
-      // Move chat to the most recent messages when new messages are added
-      scrollToChatBottom();
-    }
+      arrText.forEach(function(element){
+        var messageDiv = buildMessageDomElement(element, isUser);
+        var chatBoxElement = document.querySelector(settings.selectors.chatBox);
+        var previousLatest = chatBoxElement.querySelector((isUser
+                ? settings.selectors.fromUser : settings.selectors.fromWatson)
+                + settings.selectors.latest);
+        // Previous "latest" message is no longer the most recent
+        if (previousLatest) {
+          previousLatest.classList.remove('latest');
+        }
+
+        chatBoxElement.appendChild(messageDiv);
+        // Class to start fade in animation
+        messageDiv.classList.add('load');
+        // Move chat to the most recent messages when new messages are added
+        scrollToChatBottom();
+
+        loadAdditionalItems(element, messageDiv);
+
+        })
+      }
+  }
+  //Load Pictures and other items as part of Conversation
+  function loadAdditionalItems(text, messageDiv) {
+    switch (text) {
+                case 'Great ! You had a taxing week. You should take a break': 
+                    var oImg=document.createElement("img");
+                    oImg.setAttribute('src', '/img/relax.jpg');
+                    oImg.setAttribute('alt', 'na');
+                    oImg.setAttribute('width', '100%');
+                    messageDiv.appendChild(oImg);
+                    // Move chat to the most recent messages when new messages are added
+                    scrollToChatBottom();
+                  break;
+              }
   }
   // Checks if the given typeValue matches with the user "name", the Watson "name", or neither
   // Returns true if user, false if Watson, and null if neither
@@ -226,9 +256,8 @@ var ConversationPanel = (function() {
   }
 
   // Constructs new DOM element from a message payload
-  function buildMessageDomElement(newPayload, isUser) {
-    var dataObj = isUser ? newPayload.input : newPayload.output;
-
+  function buildMessageDomElement(text, isUser) {
+    
     var messageJson = {
       // <div class='segments'>
       'tagName': 'div',
@@ -244,7 +273,7 @@ var ConversationPanel = (function() {
           'children': [{
             // <p>{messageText}</p>
             'tagName': 'p',
-            'text': dataObj.text
+            'text': text
           }]
         }]
       }]

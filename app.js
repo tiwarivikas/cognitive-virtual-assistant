@@ -26,8 +26,11 @@ var http = require('https');
 
 var app = express();
 
+//Conversation Service workspace id.
+var workspace;
+
 //Initiate Twilio Routes
-require('./routes')(app)
+//require('./routes')(app)
 
 //Initiate Node REST Client
 var client = new Client();
@@ -215,7 +218,10 @@ var binArrayToJson = function(binArray)
 }
 
 function doConversation(req, res) {
-   var workspace = process.env.WORKSPACE_ID || '9d0e83b2-d726-4026-b4ae-392c83854192';
+   var workspace_id = req.query.workspace_id;
+   if (workspace_id!=null || workspace == null) {
+     workspace = workspace_id || process.env.WORKSPACE_ID || '9d0e83b2-d726-4026-b4ae-392c83854192';
+   }
   if (!workspace || workspace === '<workspace-id>') {
     return res.json({'output': {'text': 'The app has not been configured with a <b>WORKSPACE_ID</b> environment variable. Please refer to the ' +
     '<a href="https://github.com/watson-developer-cloud/conversation-simple">README</a> documentation on how to set this variable. <br>' +
